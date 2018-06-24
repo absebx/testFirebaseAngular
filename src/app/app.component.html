@@ -8,12 +8,39 @@
 </div>
 <div class="row">
   <div class="col">
-    Izquierda
+    Agregar
+    <div>
+      <div class="form-group">
+        <label for="new-nombre-evento">Nombre</label>
+        <input type="text" class="form-control" id="new-nombre-evento" [(ngModel)]="newEvento.name"
+        placeholder="Nombre" name="name">
+      </div>
+      <div class="form-group">
+        <label for="new-museo-evento">Museo</label>
+        <select id="new-museo-evento" class="form-control" [(ngModel)]="newEvento.museo" name="museo">
+          <option value="-1" disabled selected>Seleccione</option>
+          <option  *ngFor="let museo of museos" value="{{museo.key}}">{{museo.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="new-descripcion-evento">Descripción</label>
+        <textarea id="new-descripcion-evento" class="form-control" rows="3"
+        placeholder="Descripción" [(ngModel)]="newEvento.body" name="body"></textarea>
+      </div>
+      <div class="form-group">
+        <!-- <label for="new-fecha-evento">Fecha</label> -->
+        <p-calendar [(ngModel)]="newEvento.dateAux" [showIcon]="true" [locale]="calendar_es"
+        name ="date"></p-calendar>
+      </div>
+      <button class="btn btn-success" (click)='nuevoEvento()' *ngIf="!isEditing">Agregar</button>
+      <button type="button" class="btn btn-info" (click)="editarSubmit(idEventEditing)" *ngIf="isEditing" >Editar</button>
+      <button type="button" class="btn btn-primary" (click)="editarEvento('')" *ngIf="isEditing" >Cancelar</button>
+    </div>
   </div>
   <div class="col">
     Eventos
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let evento of eventos | async">
+        <li class="list-group-item" *ngFor="let evento of eventos">
           <div class="row">
             <div class="col">
               <strong>
@@ -31,7 +58,8 @@
               </strong>
             </div>
             <div class="col">
-                {{ evento.date.seconds*1000 | date:'medium'}}
+                {{ evento.date| date:'dd/MM/yyyy'}}
+                <!-- {{evento.date}} -->
             </div>
           </div>
           <div class="row">
@@ -41,7 +69,7 @@
               </strong>
             </div>
             <div class="col">
-                {{evento.museo}}
+                {{obtenerMuseo(evento.museo)}}
             </div>
           </div>
           <div class="row">
@@ -56,11 +84,22 @@
           </div>
           <div class="row">
             <div class="col">
-              <button class="btn btn-danger" (click)="eliminar(evento)">Eliminar</button>
+              <button class="btn btn-danger" (click)="eliminarEvento(evento)">Eliminar</button>
+              <button class="btn btn-info" (click)="editarEvento(evento.key)">Editar</button>
             </div>
           </div>
         </li>
     </ul>
   </div>
 </div>
+
+<p-dialog [(visible)]="displayDialog">
+    <p-header>
+        Los datos ingresados no son correctos
+    </p-header>
+    <p-footer>
+        <button class="btn btn-default" (click)='displayDialog = false'>OK</button>
+    </p-footer>
+</p-dialog>
+
 

@@ -25,6 +25,8 @@
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
     "firebase": "^5.0.4",
+    "primeicons": "^1.0.0-beta.9",
+    "primeng": "^6.0.0",
     "promise-polyfill": "^8.0.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
