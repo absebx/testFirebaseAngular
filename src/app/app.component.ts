@@ -163,15 +163,25 @@ export class AppComponent {
   }
 
   editarEvento(idEvento: string){
-    console.log(idEvento);
-    if(this.isEditing){
-      this.newEvento = new Evento();
-      this.isEditing = false;
-    }else{
-      this.idEventEditing = idEvento;
-      this.isEditing = true;
-      this.newEvento = this.obtenerEvento(idEvento);
-    }
+    // console.log(idEvento);
+    // if(this.isEditing){      
+    //   this.newEvento = new Evento();
+    //   this.isEditing = false;
+    // }else{
+    //   this.idEventEditing = idEvento;
+    //   this.isEditing = true;
+    //   this.newEvento = this.obtenerEvento(idEvento);
+    // }
+
+    this.idEventEditing = idEvento;
+    this.isEditing = true;
+    this.newEvento = this.obtenerEvento(idEvento);
+
+  }
+
+  cancelarEditar(){
+    this.newEvento = new Evento();
+    this.isEditing = false;
   }
 
   editarSubmit(idEvento: string){

@@ -28,13 +28,13 @@
         placeholder="Descripción" [(ngModel)]="newEvento.body" name="body"></textarea>
       </div>
       <div class="form-group">
-        <!-- <label for="new-fecha-evento">Fecha</label> -->
+        <label for="new-fecha-evento">Seleccione fecha y hora</label>
         <p-calendar [(ngModel)]="newEvento.dateAux" [showIcon]="true" [locale]="calendar_es"
-        name ="date"></p-calendar>
+        name ="date" [showTime]="true" id="new-fecha-evento"></p-calendar>
       </div>
       <button class="btn btn-success" (click)='nuevoEvento()' *ngIf="!isEditing">Agregar</button>
       <button type="button" class="btn btn-info" (click)="editarSubmit(idEventEditing)" *ngIf="isEditing" >Editar</button>
-      <button type="button" class="btn btn-primary" (click)="editarEvento('')" *ngIf="isEditing" >Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="cancelarEditar()" *ngIf="isEditing" >Cancelar</button>
     </div>
   </div>
   <div class="col">
@@ -58,7 +58,7 @@
               </strong>
             </div>
             <div class="col">
-                {{ evento.date| date:'dd/MM/yyyy'}}
+                {{ evento.date| date:'dd/MM/yyyy HH:mm'}}
                 <!-- {{evento.date}} -->
             </div>
           </div>
